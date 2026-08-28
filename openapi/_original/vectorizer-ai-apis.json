@@ -1,0 +1,99 @@
+{
+  "aid" : "vectorizer.ai:api",
+  "name" : "Vectorizer.AI API",
+  "type" : "Index",
+  "kind" : "company",
+  "description" : "Machine-readable API discovery document for Vectorizer.AI image vectorization APIs, documentation, client tools, and support resources.",
+  "image" : "https://d1j8j7mb8gx2ao.cloudfront.net/p/assets/m/favicons/vectorizer/favicon-512_c2e5baa4cff4753c6ec753a87e817486.png",
+  "url" : "https://vectorizer.ai/apis.json",
+  "created" : "2026-06-03",
+  "modified" : "2026-06-03",
+  "specificationVersion" : "0.20",
+  "tags" : [ "image vectorization", "raster to vector", "image conversion", "svg", "pdf", "eps", "dxf" ],
+  "apis" : [ {
+    "aid" : "vectorizer.ai:api:v1",
+    "name" : "Vectorizer.AI API v1",
+    "description" : "Convert raster bitmap images into vector outputs such as SVG, PDF, EPS, DXF, and PNG through a production HTTP API.",
+    "image" : "https://d1j8j7mb8gx2ao.cloudfront.net/p/assets/m/favicons/vectorizer/favicon-512_c2e5baa4cff4753c6ec753a87e817486.png",
+    "humanURL" : "https://vectorizer.ai/api/documentation",
+    "baseURL" : "https://api.vectorizer.ai/api/v1",
+    "version" : "1.0.0",
+    "tags" : [ "image vectorization", "raster to vector", "svg", "pdf", "eps", "dxf" ],
+    "properties" : [ {
+      "type" : "OpenAPI",
+      "url" : "https://vectorizer.ai/api/openapi.json",
+      "mediaType" : "application/json"
+    }, {
+      "type" : "Documentation",
+      "url" : "https://vectorizer.ai/api/documentation"
+    }, {
+      "type" : "GettingStarted",
+      "url" : "https://vectorizer.ai/api/documentation#quickstart"
+    }, {
+      "type" : "Authentication",
+      "url" : "https://vectorizer.ai/api/documentation#authentication-and-security"
+    }, {
+      "type" : "RateLimits",
+      "url" : "https://vectorizer.ai/api/documentation#rate-limiting"
+    }, {
+      "type" : "ErrorCodes",
+      "url" : "https://vectorizer.ai/api/errors"
+    }, {
+      "type" : "SDKs",
+      "url" : "https://vectorizer.ai/api/documentation#sdks"
+    }, {
+      "type" : "CLI",
+      "url" : "https://vectorizer.ai/api/documentation#cli"
+    }, {
+      "type" : "Pricing",
+      "url" : "https://vectorizer.ai/api/documentation#pricing"
+    }, {
+      "type" : "PostmanWorkspace",
+      "url" : "https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/overview"
+    }, {
+      "type" : "PostmanCollection",
+      "url" : "https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/collection/v4mk5bm/vectorizer-ai-api"
+    } ],
+    "contact" : [ {
+      "FN" : "Vectorizer.AI Support",
+      "email" : "support@vectorizer.ai",
+      "url" : "https://vectorizer.ai/support"
+    } ]
+  } ],
+  "common" : [ {
+    "type" : "Website",
+    "url" : "https://vectorizer.ai"
+  }, {
+    "type" : "DeveloperPortal",
+    "url" : "https://vectorizer.ai/api"
+  }, {
+    "type" : "Documentation",
+    "url" : "https://vectorizer.ai/api/documentation"
+  }, {
+    "type" : "Pricing",
+    "url" : "https://vectorizer.ai/pricing"
+  }, {
+    "type" : "Support",
+    "url" : "https://vectorizer.ai/support"
+  }, {
+    "type" : "TermsOfService",
+    "url" : "https://vectorizer.ai/policies/terms"
+  }, {
+    "type" : "PrivacyPolicy",
+    "url" : "https://vectorizer.ai/policies/privacy"
+  }, {
+    "type" : "GitHubOrganization",
+    "url" : "https://github.com/clv"
+  }, {
+    "type" : "GitHubRepo",
+    "url" : "https://github.com/clv/vectorizer-ai-sdk-generator"
+  }, {
+    "type" : "GitHubRepo",
+    "url" : "https://github.com/clv/vectorizer-ai-cli"
+  } ],
+  "maintainers" : [ {
+    "FN" : "Cedar Lake Ventures, Inc.",
+    "email" : "support@vectorizer.ai",
+    "url" : "https://vectorizer.ai"
+  } ]
+}

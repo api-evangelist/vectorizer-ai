@@ -1,0 +1,97 @@
+name: Vectorizer.AI
+description: >-
+  Vectorizer.AI converts raster bitmap images into vector artwork through a production HTTP API,
+  returning SVG, PDF, EPS, DXF and PNG. The API is small and single-purpose: four operations covering
+  vectorization, download of a previously vectorized result, deletion, and an account endpoint for
+  checking subscription and credit state. Authentication is HTTP Basic, using an API Id as the
+  username and an API Secret as the password. The company publishes its own APIs.json discovery
+  document at vectorizer.ai/apis.json and a first-party OpenAPI 3.0.3 description at
+  vectorizer.ai/api/openapi.json, alongside official SDKs, a cross-platform CLI, a public Postman
+  workspace, and separately documented error codes and rate limits. The service is operated by Cedar
+  Lake Ventures, Inc.
+url: https://raw.githubusercontent.com/api-evangelist/vectorizer-ai/refs/heads/main/apis.yml
+image: https://d1j8j7mb8gx2ao.cloudfront.net/p/assets/images/open-graph_7edfc602c1a14fb37dcd46e3fa5503f1.png
+created: '2026-08-28'
+modified: '2026-08-28'
+specificationVersion: '0.23'
+tags:
+  - Image Vectorization
+  - Raster To Vector
+  - Image Conversion
+  - Image Processing
+  - SVG
+  - PDF
+  - Developer API
+tags_raw:
+  - image vectorization
+  - raster to vector
+  - image conversion
+  - svg
+  - pdf
+  - eps
+  - dxf
+apis:
+  - aid: vectorizer-ai:vectorizer-ai-api-v1
+    name: Vectorizer.AI API v1
+    description: >-
+      Convert raster bitmap images into vector outputs such as SVG, PDF, EPS, DXF and PNG through a
+      production HTTP API. Four operations: POST /vectorize, POST /download, POST /delete and
+      GET /account. HTTP Basic authentication.
+    humanURL: https://vectorizer.ai/api/documentation
+    baseURL: https://api.vectorizer.ai/api/v1
+    tags:
+      - Image Vectorization
+      - Raster To Vector
+      - SVG
+      - PDF
+    properties:
+      - type: OpenAPI
+        url: openapi/vectorizer-ai-api-v1-openapi.json
+      - type: Documentation
+        url: https://vectorizer.ai/api/documentation
+      - type: GettingStarted
+        url: https://vectorizer.ai/api/documentation#quickstart
+      - type: Authentication
+        url: https://vectorizer.ai/api/documentation#authentication-and-security
+      - type: RateLimits
+        url: https://vectorizer.ai/api/documentation#rate-limiting
+      - type: ErrorCodes
+        url: https://vectorizer.ai/api/errors
+      - type: SDKs
+        url: https://vectorizer.ai/api/documentation#sdks
+      - type: CLI
+        url: https://vectorizer.ai/api/documentation#cli
+      - type: Pricing
+        url: https://vectorizer.ai/api/documentation#pricing
+      - type: PostmanWorkspace
+        url: https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/overview
+      - type: PostmanCollection
+        url: https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/collection/v4mk5bm/vectorizer-ai-api
+properties:
+  - type: Website
+    url: https://vectorizer.ai
+  - type: APIsJSON
+    url: https://vectorizer.ai/apis.json
+  - type: Documentation
+    url: https://vectorizer.ai/api/documentation
+  - type: Privacy
+    url: https://vectorizer.ai/policies/privacy
+maintainers:
+  - FN: Cedar Lake Ventures, Inc.
+    url: https://vectorizer.ai
+    email: support@vectorizer.ai
+x-evidence:
+  method: searched
+  harvested: '2026-08-28'
+  note: >-
+    Built from the provider's OWN machine-readable records, not modelled. vectorizer.ai/apis.json
+    (APIs.json 0.20, maintainer Cedar Lake Ventures, Inc.) supplied the API entry, the base URL and
+    every property below it; vectorizer.ai/api/openapi.json supplied the contract, archived verbatim
+    under openapi/_original/. Both fetched 2026-08-28 and returned 200 application/json. The host
+    discriminates — /docs, /llms.txt, /openapi.json and /.well-known/api-catalog all return real
+    1.1KB 404s — so those absences are evidence rather than assumptions. api.vectorizer.ai and
+    vectorizer.ai both resolve. No AE-authored content: nothing here was written for this profile.
+  sources:
+    - https://vectorizer.ai/apis.json
+    - https://vectorizer.ai/api/openapi.json
+    - https://vectorizer.ai/api
