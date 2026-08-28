@@ -1,0 +1,9 @@
+{
+  "url": "https://vectorizer.ai/api/openapi.json",
+  "status": 200,
+  "content_type": "application/json",
+  "bytes": 49904,
+  "fetched_at": "2026-08-28",
+  "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+  "note": "First-party OpenAPI, linked from the provider's own apis.json at https://vectorizer.ai/apis.json. Archived byte-verbatim; this sidecar records the fetch so the archive can stay untouched."
+}

@@ -1,0 +1,8 @@
+{
+  "url": "https://vectorizer.ai/apis.json",
+  "status": 200,
+  "content_type": "application/json",
+  "fetched_at": "2026-08-28",
+  "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+  "note": "The provider's own APIs.json 0.20 discovery document."
+}
