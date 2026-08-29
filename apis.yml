@@ -42,42 +42,68 @@ tags_raw:
   - eps
   - dxf
 apis:
-  - aid: vectorizer-ai:vectorizer-ai-api-v1
-    name: Vectorizer.AI API v1
-    description: >-
-      Convert raster bitmap images into vector outputs such as SVG, PDF, EPS, DXF and PNG through a
-      production HTTP API. Four operations: POST /vectorize, POST /download, POST /delete and
-      GET /account. HTTP Basic authentication.
-    humanURL: https://vectorizer.ai/api/documentation
-    baseURL: https://api.vectorizer.ai/api/v1
-    tags:
-      - Image Vectorization
-      - Raster To Vector
-      - SVG
-      - PDF
-    properties:
-      - type: OpenAPI
-        url: openapi/vectorizer-ai-api-v1-openapi.json
-      - type: Documentation
-        url: https://vectorizer.ai/api/documentation
-      - type: GettingStarted
-        url: https://vectorizer.ai/api/documentation#quickstart
-      - type: Authentication
-        url: https://vectorizer.ai/api/documentation#authentication-and-security
-      - type: RateLimits
-        url: https://vectorizer.ai/api/documentation#rate-limiting
-      - type: ErrorCodes
-        url: https://vectorizer.ai/api/errors
-      - type: SDKs
-        url: https://vectorizer.ai/api/documentation#sdks
-      - type: CLI
-        url: https://vectorizer.ai/api/documentation#cli
-      - type: Pricing
-        url: https://vectorizer.ai/api/documentation#pricing
-      - type: PostmanWorkspace
-        url: https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/overview
-      - type: PostmanCollection
-        url: https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/collection/v4mk5bm/vectorizer-ai-api
+- aid: vectorizer-ai:vectorizer-ai-account-api
+  name: Vectorizer.AI Account API
+  description: Account status and API credit information.
+  humanURL: https://vectorizer.ai/api/documentation
+  baseURL: https://api.vectorizer.ai/api/v1
+  tags:
+  - account
+  properties:
+  - type: OpenAPI
+    url: openapi/vectorizer-ai-account-api-openapi.yml
+  - type: Documentation
+    url: https://vectorizer.ai/api/documentation
+  - type: GettingStarted
+    url: https://vectorizer.ai/api/documentation#quickstart
+  - type: Authentication
+    url: https://vectorizer.ai/api/documentation#authentication-and-security
+  - type: RateLimits
+    url: https://vectorizer.ai/api/documentation#rate-limiting
+  - type: ErrorCodes
+    url: https://vectorizer.ai/api/errors
+  - type: SDKs
+    url: https://vectorizer.ai/api/documentation#sdks
+  - type: CLI
+    url: https://vectorizer.ai/api/documentation#cli
+  - type: Pricing
+    url: https://vectorizer.ai/api/documentation#pricing
+  - type: PostmanWorkspace
+    url: https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/overview
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/collection/v4mk5bm/vectorizer-ai-api
+- aid: vectorizer-ai:vectorizer-ai-vectorization-api
+  name: Vectorizer.AI Vectorization API
+  description: Vectorize images, download retained results, and delete retained images.
+  humanURL: https://vectorizer.ai/api/documentation
+  baseURL: https://api.vectorizer.ai/api/v1
+  tags:
+  - vectorization
+  properties:
+  - type: OpenAPI
+    url: openapi/vectorizer-ai-vectorization-api-openapi.yml
+  - type: Documentation
+    url: https://vectorizer.ai/api/documentation
+  - type: GettingStarted
+    url: https://vectorizer.ai/api/documentation#quickstart
+  - type: Authentication
+    url: https://vectorizer.ai/api/documentation#authentication-and-security
+  - type: RateLimits
+    url: https://vectorizer.ai/api/documentation#rate-limiting
+  - type: ErrorCodes
+    url: https://vectorizer.ai/api/errors
+  - type: SDKs
+    url: https://vectorizer.ai/api/documentation#sdks
+  - type: CLI
+    url: https://vectorizer.ai/api/documentation#cli
+  - type: Pricing
+    url: https://vectorizer.ai/api/documentation#pricing
+  - type: PostmanWorkspace
+    url: https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/overview
+  - type: PostmanCollection
+    url: >-
+      https://www.postman.com/jamesd-clv-1835738/vectorizer-ai-api/collection/v4mk5bm/vectorizer-ai-api
 properties:
   - type: Website
     url: https://vectorizer.ai

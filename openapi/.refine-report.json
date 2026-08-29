@@ -1,0 +1,24 @@
+{
+  "provider": "vectorizer-ai",
+  "sources": [
+    "_original/vectorizer-ai-api-v1-openapi.json",
+    "vectorizer-ai-api-v1-openapi.json"
+  ],
+  "outputs": [
+    "vectorizer-ai-account-api-openapi.yml",
+    "vectorizer-ai-vectorization-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/vectorizer-ai-api-v1-openapi.json"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vectorizer-ai-api-v1-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "vectorizer-ai-api-v1-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'account' spans 2 source specs (vectorizer-ai-api-v1-openapi.json, vectorizer-ai-api-v1-openapi.json): per-path servers applied",
+    "tag 'vectorization' spans 2 source specs (vectorizer-ai-api-v1-openapi.json, vectorizer-ai-api-v1-openapi.json): per-path servers applied"
+  ],
+  "skipped": []
+}

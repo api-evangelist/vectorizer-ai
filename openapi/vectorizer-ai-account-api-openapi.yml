@@ -1,0 +1,152 @@
+openapi: 3.2.0
+info:
+  title: Vectorizer Ai Account API
+  version: 1.0.0
+  contact:
+    name: Vectorizer.AI Support
+    url: https://vectorizer.ai/support
+    email: support@vectorizer.ai
+  license:
+    name: Proprietary
+    url: https://vectorizer.ai/policies/terms
+  termsOfService: https://vectorizer.ai/policies/terms
+  description: 'Operations tagged account across 2 of this provider''s published API definitions: vectorizer-ai-api-v1-openapi.json, vectorizer-ai-api-v1-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.vectorizer.ai/api/v1
+  description: Vectorizer.AI API v1 endpoint
+security:
+- basicAuth: []
+tags:
+- name: account
+  description: Account status and API credit information.
+paths:
+  /account:
+    get:
+      summary: Get account status
+      description: Fetch the subscription state and remaining API credits for the authenticated account.
+      operationId: getAccountStatus
+      tags:
+      - account
+      x-group-parameters: true
+      responses:
+        '200':
+          description: Account status for the authenticated API credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountStatusResponse'
+        '400':
+          description: Invalid request parameters, image input, URL fetch, or Image Token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            WWW-Authenticate:
+              description: HTTP Basic authentication challenge returned with 401 responses.
+              schema:
+                type: string
+        '402':
+          description: The account does not have an API subscription, is past due, or is out of credits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: The uploaded image, fetched image, or requested PNG output is too large.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded. Back off before retrying.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            Retry-After:
+              description: Number of seconds to wait before retrying, when provided.
+              schema:
+                type: integer
+                format: int32
+        '500':
+          description: Unexpected internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Temporary overload or internal processing timeout. Retry later.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            Retry-After:
+              description: Number of seconds to wait before retrying, when provided.
+              schema:
+                type: integer
+                format: int32
+    servers:
+    - url: https://api.vectorizer.ai/api/v1
+      description: Vectorizer.AI API v1 endpoint
+components:
+  schemas:
+    AccountStatusResponse:
+      type: object
+      properties:
+        subscriptionPlan:
+          type: string
+          description: The subscription plan currently associated with the account, or 'none'.
+        subscriptionState:
+          type: string
+          description: 'The current subscription state: ''active'', ''pastDue'', or ''ended''.'
+        credits:
+          type: number
+          format: double
+          description: The number of API credits left. Can be fractional, so parse as a double-precision number.
+      required:
+      - subscriptionPlan
+      - subscriptionState
+      - credits
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              format: int32
+            code:
+              type: integer
+              format: int32
+            message:
+              type: string
+          required:
+          - status
+          - code
+          - message
+        dataReceived:
+          description: Echo of the submitted request data when available. File uploads are summarized instead of echoed.
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+      required:
+      - error
+      - dataReceived
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+x-refined-from:
+- vectorizer-ai-api-v1-openapi.json
+- vectorizer-ai-api-v1-openapi.json
