@@ -10,6 +10,17 @@ description: >-
   workspace, and separately documented error codes and rate limits. The service is operated by Cedar
   Lake Ventures, Inc.
 url: https://raw.githubusercontent.com/api-evangelist/vectorizer-ai/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://d1j8j7mb8gx2ao.cloudfront.net/p/assets/images/open-graph_7edfc602c1a14fb37dcd46e3fa5503f1.png
 created: '2026-08-28'
 modified: '2026-08-28'
