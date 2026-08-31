@@ -26,13 +26,13 @@ created: '2026-08-28'
 modified: '2026-08-28'
 specificationVersion: '0.23'
 tags:
-  - Image Vectorization
-  - Raster To Vector
-  - Image Conversion
-  - Image Processing
-  - SVG
-  - PDF
-  - Developer API
+  - image vectorization
+  - raster to vector
+  - image conversion
+  - svg
+  - pdf
+  - eps
+  - dxf
 tags_raw:
   - image vectorization
   - raster to vector
@@ -48,6 +48,8 @@ apis:
   humanURL: https://vectorizer.ai/api/documentation
   baseURL: https://api.vectorizer.ai/api/v1
   tags:
+  - Account
+  tags_raw:
   - account
   properties:
   - type: OpenAPI
@@ -79,6 +81,8 @@ apis:
   humanURL: https://vectorizer.ai/api/documentation
   baseURL: https://api.vectorizer.ai/api/v1
   tags:
+  - Vectorization
+  tags_raw:
   - vectorization
   properties:
   - type: OpenAPI
