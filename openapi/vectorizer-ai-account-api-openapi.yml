@@ -1,7 +1,9 @@
 openapi: 3.2.0
 info:
-  title: Vectorizer Ai Account API
+  title: Vectorizer.AI Account API
   version: 1.0.0
+  description: OpenAPI 3.0 specification for the Vectorizer.AI image vectorization API. Authenticate with HTTP Basic auth, using your API Id as the username and your API Secret as the password.
+  termsOfService: https://vectorizer.ai/policies/terms
   contact:
     name: Vectorizer.AI Support
     url: https://vectorizer.ai/support
@@ -9,15 +11,13 @@ info:
   license:
     name: Proprietary
     url: https://vectorizer.ai/policies/terms
-  termsOfService: https://vectorizer.ai/policies/terms
-  description: 'Operations tagged account across 2 of this provider''s published API definitions: vectorizer-ai-api-v1-openapi.json, vectorizer-ai-api-v1-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.vectorizer.ai/api/v1
   description: Vectorizer.AI API v1 endpoint
 security:
 - basicAuth: []
 tags:
-- name: account
+- name: Account
   description: Account status and API credit information.
 paths:
   /account:
@@ -26,7 +26,7 @@ paths:
       description: Fetch the subscription state and remaining API credits for the authenticated account.
       operationId: getAccountStatus
       tags:
-      - account
+      - Account
       x-group-parameters: true
       responses:
         '200':
@@ -94,9 +94,6 @@ paths:
               schema:
                 type: integer
                 format: int32
-    servers:
-    - url: https://api.vectorizer.ai/api/v1
-      description: Vectorizer.AI API v1 endpoint
 components:
   schemas:
     AccountStatusResponse:
@@ -147,6 +144,3 @@ components:
     basicAuth:
       type: http
       scheme: basic
-x-refined-from:
-- vectorizer-ai-api-v1-openapi.json
-- vectorizer-ai-api-v1-openapi.json

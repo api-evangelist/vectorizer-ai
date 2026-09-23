@@ -1,7 +1,9 @@
 openapi: 3.2.0
 info:
-  title: Vectorizer Ai Vectorization API
+  title: Vectorizer.AI Vectorization API
   version: 1.0.0
+  description: OpenAPI 3.0 specification for the Vectorizer.AI image vectorization API. Authenticate with HTTP Basic auth, using your API Id as the username and your API Secret as the password.
+  termsOfService: https://vectorizer.ai/policies/terms
   contact:
     name: Vectorizer.AI Support
     url: https://vectorizer.ai/support
@@ -9,8 +11,6 @@ info:
   license:
     name: Proprietary
     url: https://vectorizer.ai/policies/terms
-  termsOfService: https://vectorizer.ai/policies/terms
-  description: 'Operations tagged vectorization across 2 of this provider''s published API definitions: vectorizer-ai-api-v1-openapi.json, vectorizer-ai-api-v1-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.vectorizer.ai/api/v1
   description: Vectorizer.AI API v1 endpoint
@@ -146,9 +146,6 @@ paths:
               schema:
                 type: integer
                 format: int32
-    servers:
-    - url: https://api.vectorizer.ai/api/v1
-      description: Vectorizer.AI API v1 endpoint
   /download:
     post:
       summary: Download a retained result
@@ -272,9 +269,6 @@ paths:
               schema:
                 type: integer
                 format: int32
-    servers:
-    - url: https://api.vectorizer.ai/api/v1
-      description: Vectorizer.AI API v1 endpoint
   /delete:
     post:
       summary: Delete a retained image
@@ -356,9 +350,6 @@ paths:
               schema:
                 type: integer
                 format: int32
-    servers:
-    - url: https://api.vectorizer.ai/api/v1
-      description: Vectorizer.AI API v1 endpoint
 components:
   schemas:
     DeleteImageResponse:
@@ -369,6 +360,286 @@ components:
           description: Always true when the Image Token has been deleted.
       required:
       - success
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              format: int32
+            code:
+              type: integer
+              format: int32
+            message:
+              type: string
+          required:
+          - status
+          - code
+          - message
+        dataReceived:
+          description: Echo of the submitted request data when available. File uploads are summarized instead of echoed.
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+      required:
+      - error
+      - dataReceived
+    DownloadRequest:
+      type: object
+      description: Multipart form fields for downloading a retained result. The image.token field is required.
+      additionalProperties: false
+      properties:
+        image.token:
+          type: string
+          description: Image Token returned from a vectorize request with policy.retention_days > 0.
+        receipt:
+          type: string
+          description: Receipt returned in the X-Receipt response header when upgrading a preview result to production. Include it when downloading additional formats from that upgraded preview.
+        output.file_format:
+          type: string
+          format: string
+          enum:
+          - svg
+          - eps
+          - pdf
+          - dxf
+          - png
+          description: Output file format to generate.
+          default: svg
+        output.shape_stacking:
+          type: string
+          format: string
+          enum:
+          - cutouts
+          - stacked
+          description: Whether shapes are cut out of each other or stacked atop each other.
+          default: cutouts
+        output.group_by:
+          type: string
+          format: string
+          enum:
+          - none
+          - color
+          - parent
+          - layer
+          description: Grouping of shapes in output.
+          default: none
+        output.draw_style:
+          type: string
+          format: string
+          enum:
+          - fill_shapes
+          - stroke_shapes
+          - stroke_edges
+          description: How shapes are rendered.
+          default: fill_shapes
+        output.strokes.stroke_width:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 5
+          description: Width of stroke for shape outlines (when enabled).
+          default: 1
+        output.strokes.non_scaling_stroke:
+          type: boolean
+          description: Use non-scaling strokes when drawing shape outlines.
+          default: true
+        output.strokes.use_override_color:
+          type: boolean
+          description: Override shape color with a specific color.
+          default: false
+        output.strokes.override_color:
+          type: string
+          description: Color value to override shape stroke color if enabled. Must be in '#RRGGBB' or 'rgba(r,g,b,a)' format.
+          default: '#000000'
+          example: '#FF00FF'
+        output.gap_filler.enabled:
+          type: boolean
+          description: Enable filling small visual gaps caused by vector rendering artifacts.
+          default: true
+        output.gap_filler.non_scaling_stroke:
+          type: boolean
+          description: Use non-scaling strokes for gap filling.
+          default: true
+        output.gap_filler.clip:
+          type: boolean
+          description: Clip gap filler strokes to shape bounds when stacking shapes.
+          default: false
+        output.gap_filler.stroke_width:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 5
+          description: Width of the gap filler strokes (in output units).
+          default: 2
+        output.parameterized_shapes.flatten:
+          type: boolean
+          description: Whether to flatten detected circles, rectangles, and stars to curves.
+          default: false
+        output.curves.line_fit_tolerance:
+          type: number
+          format: float
+          minimum: 0.001
+          maximum: 1
+          description: Maximum allowed error when approximating curves with line segments.
+          default: 0.1
+        output.curves.allowed.quadratic_bezier:
+          type: boolean
+          description: Allow quadratic Bézier curves in the output.
+          default: true
+        output.curves.allowed.cubic_bezier:
+          type: boolean
+          description: Allow cubic Bézier curves in the output.
+          default: true
+        output.curves.allowed.circular_arc:
+          type: boolean
+          description: Allow circular arcs in the output.
+          default: true
+        output.curves.allowed.elliptical_arc:
+          type: boolean
+          description: Allow elliptical arcs in the output.
+          default: true
+        output.svg.version:
+          type: string
+          format: string
+          enum:
+          - svg_1_0
+          - svg_1_1
+          - svg_tiny_1_2
+          description: SVG version to declare in the SVG output.
+          default: svg_1_1
+        output.svg.fixed_size:
+          type: boolean
+          description: Whether to fix the SVG dimensions in the output file.
+          default: false
+        output.svg.adobe_compatibility_mode:
+          type: boolean
+          description: Enable Illustrator compatibility by disabling unsupported SVG features.
+          default: false
+        output.pdf.version:
+          type: string
+          format: string
+          enum:
+          - PDF_1_4
+          description: PDF version to generate for PDF output.
+          default: PDF_1_4
+        output.pdf.compression_mode:
+          type: string
+          format: string
+          enum:
+          - None
+          - Deflate
+          description: Compression method to apply to PDF output streams.
+          default: Deflate
+        output.eps.version:
+          type: string
+          format: string
+          enum:
+          - PS_3_0_EPSF_3_0
+          description: EPS format version for EPS output.
+          default: PS_3_0_EPSF_3_0
+        output.dxf.compatibility_level:
+          type: string
+          format: string
+          enum:
+          - lines_only
+          - lines_and_arcs
+          - lines_arcs_and_splines
+          description: Level of primitive support for DXF output.
+          default: lines_and_arcs
+        output.bitmap.anti_aliasing_mode:
+          type: string
+          format: string
+          enum:
+          - anti_aliased
+          - aliased
+          description: Anti-aliasing mode for bitmap (PNG) output.
+          default: anti_aliased
+        output.size.scale:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1000
+          description: Overall uniform scaling factor for the output image.
+          example: 1
+        output.size.width:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1000000000000
+          description: Output width, in the selected unit (see output.size.unit).
+          example: 100
+        output.size.height:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1000000000000
+          description: Output height, in the selected unit (see output.size.unit).
+          example: 100
+        output.size.unit:
+          type: string
+          format: string
+          enum:
+          - none
+          - px
+          - pt
+          - in
+          - cm
+          - mm
+          description: Measurement unit for output dimensions.
+          default: none
+        output.size.aspect_ratio:
+          type: string
+          format: string
+          enum:
+          - preserve_inset
+          - preserve_overflow
+          - stretch
+          description: How to preserve or stretch aspect ratio.
+          default: preserve_inset
+        output.size.align_x:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Horizontal alignment (0.0 = left, 0.5 = center, 1.0 = right) when aspect ratio is preserved.
+          default: 0.5
+        output.size.align_y:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Vertical alignment (0.0 = top, 0.5 = center, 1.0 = bottom) when aspect ratio is preserved.
+          default: 0.5
+        output.size.input_dpi:
+          type: number
+          format: float
+          minimum: 1
+          maximum: 1000000
+          description: Override the detected DPI of the input image for size computations.
+          example: 300
+        output.size.output_dpi:
+          type: number
+          format: float
+          minimum: 1
+          maximum: 1000000
+          description: DPI setting for the output image.
+          example: 300
+      required:
+      - image.token
+    DeleteImageRequest:
+      type: object
+      description: Multipart form fields for deleting a retained image and result.
+      additionalProperties: false
+      properties:
+        image.token:
+          type: string
+          description: Image Token to delete before its retention period expires.
+      required:
+      - image.token
     VectorizeRequest:
       type: object
       description: Multipart form fields for vectorizing an image. Field names containing dots are literal form field names.
@@ -726,290 +997,7 @@ components:
         - image.base64
       - required:
         - image.token
-    DeleteImageRequest:
-      type: object
-      description: Multipart form fields for deleting a retained image and result.
-      additionalProperties: false
-      properties:
-        image.token:
-          type: string
-          description: Image Token to delete before its retention period expires.
-      required:
-      - image.token
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            status:
-              type: integer
-              format: int32
-            code:
-              type: integer
-              format: int32
-            message:
-              type: string
-          required:
-          - status
-          - code
-          - message
-        dataReceived:
-          description: Echo of the submitted request data when available. File uploads are summarized instead of echoed.
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
-      required:
-      - error
-      - dataReceived
-    DownloadRequest:
-      type: object
-      description: Multipart form fields for downloading a retained result. The image.token field is required.
-      additionalProperties: false
-      properties:
-        image.token:
-          type: string
-          description: Image Token returned from a vectorize request with policy.retention_days > 0.
-        receipt:
-          type: string
-          description: Receipt returned in the X-Receipt response header when upgrading a preview result to production. Include it when downloading additional formats from that upgraded preview.
-        output.file_format:
-          type: string
-          format: string
-          enum:
-          - svg
-          - eps
-          - pdf
-          - dxf
-          - png
-          description: Output file format to generate.
-          default: svg
-        output.shape_stacking:
-          type: string
-          format: string
-          enum:
-          - cutouts
-          - stacked
-          description: Whether shapes are cut out of each other or stacked atop each other.
-          default: cutouts
-        output.group_by:
-          type: string
-          format: string
-          enum:
-          - none
-          - color
-          - parent
-          - layer
-          description: Grouping of shapes in output.
-          default: none
-        output.draw_style:
-          type: string
-          format: string
-          enum:
-          - fill_shapes
-          - stroke_shapes
-          - stroke_edges
-          description: How shapes are rendered.
-          default: fill_shapes
-        output.strokes.stroke_width:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 5
-          description: Width of stroke for shape outlines (when enabled).
-          default: 1
-        output.strokes.non_scaling_stroke:
-          type: boolean
-          description: Use non-scaling strokes when drawing shape outlines.
-          default: true
-        output.strokes.use_override_color:
-          type: boolean
-          description: Override shape color with a specific color.
-          default: false
-        output.strokes.override_color:
-          type: string
-          description: Color value to override shape stroke color if enabled. Must be in '#RRGGBB' or 'rgba(r,g,b,a)' format.
-          default: '#000000'
-          example: '#FF00FF'
-        output.gap_filler.enabled:
-          type: boolean
-          description: Enable filling small visual gaps caused by vector rendering artifacts.
-          default: true
-        output.gap_filler.non_scaling_stroke:
-          type: boolean
-          description: Use non-scaling strokes for gap filling.
-          default: true
-        output.gap_filler.clip:
-          type: boolean
-          description: Clip gap filler strokes to shape bounds when stacking shapes.
-          default: false
-        output.gap_filler.stroke_width:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 5
-          description: Width of the gap filler strokes (in output units).
-          default: 2
-        output.parameterized_shapes.flatten:
-          type: boolean
-          description: Whether to flatten detected circles, rectangles, and stars to curves.
-          default: false
-        output.curves.line_fit_tolerance:
-          type: number
-          format: float
-          minimum: 0.001
-          maximum: 1
-          description: Maximum allowed error when approximating curves with line segments.
-          default: 0.1
-        output.curves.allowed.quadratic_bezier:
-          type: boolean
-          description: Allow quadratic Bézier curves in the output.
-          default: true
-        output.curves.allowed.cubic_bezier:
-          type: boolean
-          description: Allow cubic Bézier curves in the output.
-          default: true
-        output.curves.allowed.circular_arc:
-          type: boolean
-          description: Allow circular arcs in the output.
-          default: true
-        output.curves.allowed.elliptical_arc:
-          type: boolean
-          description: Allow elliptical arcs in the output.
-          default: true
-        output.svg.version:
-          type: string
-          format: string
-          enum:
-          - svg_1_0
-          - svg_1_1
-          - svg_tiny_1_2
-          description: SVG version to declare in the SVG output.
-          default: svg_1_1
-        output.svg.fixed_size:
-          type: boolean
-          description: Whether to fix the SVG dimensions in the output file.
-          default: false
-        output.svg.adobe_compatibility_mode:
-          type: boolean
-          description: Enable Illustrator compatibility by disabling unsupported SVG features.
-          default: false
-        output.pdf.version:
-          type: string
-          format: string
-          enum:
-          - PDF_1_4
-          description: PDF version to generate for PDF output.
-          default: PDF_1_4
-        output.pdf.compression_mode:
-          type: string
-          format: string
-          enum:
-          - None
-          - Deflate
-          description: Compression method to apply to PDF output streams.
-          default: Deflate
-        output.eps.version:
-          type: string
-          format: string
-          enum:
-          - PS_3_0_EPSF_3_0
-          description: EPS format version for EPS output.
-          default: PS_3_0_EPSF_3_0
-        output.dxf.compatibility_level:
-          type: string
-          format: string
-          enum:
-          - lines_only
-          - lines_and_arcs
-          - lines_arcs_and_splines
-          description: Level of primitive support for DXF output.
-          default: lines_and_arcs
-        output.bitmap.anti_aliasing_mode:
-          type: string
-          format: string
-          enum:
-          - anti_aliased
-          - aliased
-          description: Anti-aliasing mode for bitmap (PNG) output.
-          default: anti_aliased
-        output.size.scale:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1000
-          description: Overall uniform scaling factor for the output image.
-          example: 1
-        output.size.width:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1000000000000
-          description: Output width, in the selected unit (see output.size.unit).
-          example: 100
-        output.size.height:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1000000000000
-          description: Output height, in the selected unit (see output.size.unit).
-          example: 100
-        output.size.unit:
-          type: string
-          format: string
-          enum:
-          - none
-          - px
-          - pt
-          - in
-          - cm
-          - mm
-          description: Measurement unit for output dimensions.
-          default: none
-        output.size.aspect_ratio:
-          type: string
-          format: string
-          enum:
-          - preserve_inset
-          - preserve_overflow
-          - stretch
-          description: How to preserve or stretch aspect ratio.
-          default: preserve_inset
-        output.size.align_x:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: Horizontal alignment (0.0 = left, 0.5 = center, 1.0 = right) when aspect ratio is preserved.
-          default: 0.5
-        output.size.align_y:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: Vertical alignment (0.0 = top, 0.5 = center, 1.0 = bottom) when aspect ratio is preserved.
-          default: 0.5
-        output.size.input_dpi:
-          type: number
-          format: float
-          minimum: 1
-          maximum: 1000000
-          description: Override the detected DPI of the input image for size computations.
-          example: 300
-        output.size.output_dpi:
-          type: number
-          format: float
-          minimum: 1
-          maximum: 1000000
-          description: DPI setting for the output image.
-          example: 300
-      required:
-      - image.token
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
-x-refined-from:
-- vectorizer-ai-api-v1-openapi.json
-- vectorizer-ai-api-v1-openapi.json
