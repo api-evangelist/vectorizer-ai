@@ -96,6 +96,23 @@ paths:
                 format: int32
 components:
   schemas:
+    AccountStatusResponse:
+      type: object
+      properties:
+        subscriptionPlan:
+          type: string
+          description: The subscription plan currently associated with the account, or 'none'.
+        subscriptionState:
+          type: string
+          description: 'The current subscription state: ''active'', ''pastDue'', or ''ended''.'
+        credits:
+          type: number
+          format: double
+          description: The number of API credits left. Can be fractional, so parse as a double-precision number.
+      required:
+      - subscriptionPlan
+      - subscriptionState
+      - credits
     ErrorResponse:
       type: object
       properties:
@@ -123,23 +140,6 @@ components:
       required:
       - error
       - dataReceived
-    AccountStatusResponse:
-      type: object
-      properties:
-        subscriptionPlan:
-          type: string
-          description: The subscription plan currently associated with the account, or 'none'.
-        subscriptionState:
-          type: string
-          description: 'The current subscription state: ''active'', ''pastDue'', or ''ended''.'
-        credits:
-          type: number
-          format: double
-          description: The number of API credits left. Can be fractional, so parse as a double-precision number.
-      required:
-      - subscriptionPlan
-      - subscriptionState
-      - credits
   securitySchemes:
     basicAuth:
       type: http
