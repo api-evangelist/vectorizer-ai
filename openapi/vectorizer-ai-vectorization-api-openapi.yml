@@ -352,6 +352,16 @@ paths:
                 format: int32
 components:
   schemas:
+    DeleteImageRequest:
+      type: object
+      description: Multipart form fields for deleting a retained image and result.
+      additionalProperties: false
+      properties:
+        image.token:
+          type: string
+          description: Image Token to delete before its retention period expires.
+      required:
+      - image.token
     VectorizeRequest:
       type: object
       description: Multipart form fields for vectorizing an image. Field names containing dots are literal form field names.
@@ -709,16 +719,14 @@ components:
         - image.base64
       - required:
         - image.token
-    DeleteImageRequest:
+    DeleteImageResponse:
       type: object
-      description: Multipart form fields for deleting a retained image and result.
-      additionalProperties: false
       properties:
-        image.token:
-          type: string
-          description: Image Token to delete before its retention period expires.
+        success:
+          type: boolean
+          description: Always true when the Image Token has been deleted.
       required:
-      - image.token
+      - success
     DownloadRequest:
       type: object
       description: Multipart form fields for downloading a retained result. The image.token field is required.
@@ -989,14 +997,6 @@ components:
       required:
       - error
       - dataReceived
-    DeleteImageResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Always true when the Image Token has been deleted.
-      required:
-      - success
   securitySchemes:
     basicAuth:
       type: http
