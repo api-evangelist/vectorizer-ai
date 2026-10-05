@@ -1,0 +1,12 @@
+{
+ "url": "https://vectorizer.ai/api/openapi.json",
+ "requested_url": "https://vectorizer.ai/api/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 49904,
+ "sha256": "7e702e1b999115f95bddc0dba68a6e2a13b51bb12af77ed8ec50103bb6f86bc8",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
